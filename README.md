@@ -53,6 +53,7 @@ pip install -r requirements.txt
 4. Create a `.env` file in the root directory:
 ```cmd
 GROQ_API_KEY=your_groq_api_key_here
+PERSISTANT_DIRECTORY=path to your persistant directory
 ```
 
 ## 🚦 Running the Application
