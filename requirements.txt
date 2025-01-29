@@ -1,0 +1,29 @@
+# Core dependencies
+pydantic>=2.0.0
+loguru>=0.7.0
+
+# LangChain and related packages
+langchain>=0.1.0
+langchain-text-splitters>=0.0.1
+langchain-mistralai>=0.0.3
+langchain-chroma>=0.0.1
+langchain-community>=0.0.16
+
+# Vector store
+chromadb>=0.4.0
+
+# Embeddings
+sentence-transformers>=2.2.2
+torch>=2.0.0
+
+# File handling
+python-magic>=0.4.27
+chardet>=5.0.0
+
+# Additional dependencies
+transformers>=4.36.0
+
+# API dependencies
+fastapi>=0.109.0
+uvicorn>=0.27.0
+python-multipart>=0.0.6
