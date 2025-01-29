@@ -6,9 +6,13 @@ from chat import RetrievalChatSystem
 import uvicorn
 from loguru import logger
 import os
+from dotenv import load_dotenv
 
 # Import the necessary classes from load_data_flow.py
 from load_data_flow import DataIngestionConfig, DataIngestionPipeline
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -39,9 +43,8 @@ async def startup_event():
     try:
         chat_system = RetrievalChatSystem(
             collection_name="Random_Data",  # Replace with your collection name
-            persist_directory="D:\\Hexylon\\langflow\\chroma_db",  # Replace with your ChromaDB path
-            # api_key="jzc3Rj2lR4hBP3ZkKjDxRzq4Rp6lVnsf",  # Mistral API key
-            api_key = "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",  # Groq API key
+            persist_directory=os.getenv("PERSISTANT_DIRECTORY"),  # Replace with your ChromaDB path
+            api_key = os.getenv("GROQ_API_KEY"),  # Groq API key
             embedding_model="sentence-transformers/all-MiniLM-L6-v2"
         )
         logger.info("Chat system initialized successfully")
@@ -92,7 +95,7 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/upload-pdf")
+@app.post("/upload")
 async def upload_pdf(file: UploadFile = File(...)):
     """Endpoint to upload a PDF file and process it into ChromaDB"""
     try:
@@ -106,7 +109,7 @@ async def upload_pdf(file: UploadFile = File(...)):
             file_path=file_path,
             model_name="sentence-transformers/all-MiniLM-L6-v2",
             encode_device="cpu",
-            persist_directory="D:\\Hexylon\\langflow\\chroma_db"
+            persist_directory=os.getenv("PERSISTANT_DIRECTORY")
         )
         
         # Process the file using the data ingestion pipeline

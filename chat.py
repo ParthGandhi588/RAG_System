@@ -16,9 +16,7 @@ class RetrievalChatSystem:
         persist_directory: str,
         embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2",
         api_key: str = None,
-        # model_name: str = "mistral-small-latest", # Mistral's version of Mixtral
         model_name: str = "DeepSeek-R1-Distill-Llama-70B", # Groq's version of DeepSeek
-        # model_name: str = "mixtral-8x7b-32768",  # Groq's version of Mixtral
         chroma_settings: Optional[Settings] = None
     ):
         # Initialize embeddings with the same model used for creating the collection
@@ -35,14 +33,7 @@ class RetrievalChatSystem:
             client_settings=chroma_settings
         )
         
-        # # Initialize Mistral LLM
-        # self.llm = ChatMistralAI(
-        #     model_name=model_name,
-        #     api_key=api_key,
-        #     temperature=0.4
-        # )
-
-        # # Initialize Groq LLM
+        # Initialize Groq LLM
         self.llm = ChatGroq(
             model_name=model_name,
             api_key=api_key,
@@ -88,7 +79,7 @@ class RetrievalChatSystem:
             return Message(
                 text="I couldn't find any relevant information in the database to answer your question. Could you please rephrase or ask something else?",
                 sender="AI",
-                sender_name="LOM-AI Assistant",
+                sender_name="AI Assistant",
                 properties={
                     "background_color": "#f0f0f0",
                     "icon": "bot"
@@ -119,7 +110,7 @@ Response:"""
         output_message = Message(
             text=response.content,
             sender="AI",
-            sender_name="LOM-AI Assistant",
+            sender_name="AI Assistant",
             properties={
                 "background_color": "#f0f0f0",
                 "icon": "bot"

@@ -8,6 +8,7 @@ langchain-text-splitters>=0.0.1
 langchain-mistralai>=0.0.3
 langchain-chroma>=0.0.1
 langchain-community>=0.0.16
+langflow
 
 # Vector store
 chromadb>=0.4.0
